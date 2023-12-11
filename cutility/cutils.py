@@ -17,8 +17,10 @@ class Cutils:
     def __init__(
         self,
         project_root=os.path.abspath(os.curdir),
-        data_root=os.getenv("DATA_ROOT", f"{os.path.abspath(os.curdir)}/data"),
-        config_root=os.getenv("CONFIG_ROOT", f"{os.path.abspath(os.curdir)}/config"),
+        data_root=os.getenv("DATA_ROOT", f"{os.path.abspath(os.curdir)}/src/data"),
+        config_root=os.getenv(
+            "CONFIG_ROOT", f"{os.path.abspath(os.curdir)}/src/config"
+        ),
         verbose=False,
     ):
         """
@@ -38,7 +40,7 @@ class Cutils:
         self.project_root = project_root
         self.config_root = config_root
         self.data_root = data_root
-        self.config_files = glob(f"{self.config_root}/*")
+        self.config_files = glob(f"{self.config_root}/*.yml")
 
         if verbose:
             print("~" * 30)
