@@ -121,13 +121,13 @@ class PiiCleaner:
         print(text_without_contacts)
         ```
         """
-        # Define a generic regular expression pattern for matching phone numbers
-        phone_number_pattern = re.compile(
-            r"(?:(?:\+?\d{1,4}[\s-]?)?(?:\(\d{1,4}\)[\s-]?)?)?"
-            r"(?:\d{1,4}[\s-]?){1,4}(?:\d{1,9})"
-        )
+        pattern1 = r"\+[-()\s\d]+?(?=\s*[+<])"
+        pattern2 = r"[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]"
+
+        # Combine both patterns into a single pattern
+        combined_pattern = re.compile(f"{pattern1}|{pattern2}")
 
         # Replace phone numbers with an empty string
-        cleaned_text = phone_number_pattern.sub(repl, text)
+        cleaned_text = combined_pattern.sub("", text)
 
         return cleaned_text
