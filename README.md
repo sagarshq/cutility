@@ -7,6 +7,7 @@ Common utils for development
 You can install TextCleaner using pip:
 
 ```bash
+# install cutility
 pip install cutility
 ```
 
@@ -15,15 +16,15 @@ pip install cutility
 pip install --upgrade cutility
 ```
 
-# Variables
+## Variables
 
-What is project_root?
+What is `project_root`?
 
-- Directory that holds your src folder is your project_root
+- Directory that holds your src folder is your `project_root`
 
-What is data_root?
+What is `data_root`?
 
-- Directory that holds all your data folder is your data_root
+- Directory that holds all your data folder is your `data_root`
 
 # Usage
 
@@ -46,7 +47,42 @@ log.i("This is info message")
 # also supports warning critical debug messages
 ```
 
+## Getting names_list
+
+I have curated list of first names and last names from public github databases and compiled it here in a github gist.
+Use this command to get names data.
+
+```bash
+wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285a/raw/fbcca7c6821e7aff285271a6ce42361bbe95cc0c/pii_names.json
+```
+
+## Generic cleaner
+
+Use this snippet to collectively apply multiple cleaning functions
+
+```python
+
+all_cleaning_steps = [
+    # text cleaning
+    (tc.clean_emojis, {}),
+    (tc.clean_extra_newlines, {}),
+    (tc.clean_extra_spaces, {}),
+    (tc.clean_hashtags, {}),
+    (tc.clean_profile_handle, {}),
+    (tc.clean_symbols_except_punctuation, {}),
+    (tc.clean_unicode_characters, {}),
+    (tc.clean_web_links, {}),
+    # pii cleaning
+    (pii.replace_contacts, {"repl": " {{CONTACT}} "}),
+    (pii.replace_emails, {"repl": " {{EMAIL}} "}),
+    (pii.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
+]
+
+```
+
 ## Text cleaner
+
+Use this snippet to individually apply simple cleaning functions
 
 ```python
 # Import the TextCleaner class
@@ -80,6 +116,8 @@ final_cleaned_text = tc.clean_extra_spaces(text_without_emojis)
 ```
 
 ## PII cleaner
+
+Use this snippet to individually apply PII cleaning functions
 
 ```python
 from cleaners.pii_cleaner import PiiCleaner

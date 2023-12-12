@@ -1,17 +1,20 @@
 # pre-requisites
 
 ```bash
+python -m venv pyenv
 pip install twine setuptools
 ```
 
 # packaging
 
 ```bash
-python -m venv pyenv
+# test locally
 pip3 install .
+
+# run setup.py
 python setup.py sdist
 
-
+# upload to pypi
 python -m twine upload --repository pypi dist/*
 ```
 
