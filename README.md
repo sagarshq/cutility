@@ -61,7 +61,7 @@ wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285
 Use this snippet to collectively apply multiple cleaning functions
 
 ```python
-from cleaners.clean import GenericClean as cc
+from cutility.cleaners.clean import GenCleaner as cc
 
 all_cleaning_steps = [
     # text cleaning

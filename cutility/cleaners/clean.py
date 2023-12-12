@@ -1,11 +1,19 @@
-class GenericClean(TextCleaner, PiiCleaner):
+"""
+Class to call all cleaners
+"""
+
+from .pii_cleaner import PiiCleaner
+from .text_cleaner import TextCleaner
+
+
+class GenCleaner(TextCleaner, PiiCleaner):
     """
     A utility class for generic text cleaning operations, combining functionality from TextCleaner and PiiCleaner.
 
     Example:
     ```python
-    # Create an instance of GenericClean
-    generic_cleaner = GenericClean()
+    # Create an instance of GenCleaner
+    generic_cleaner = GenCleaner()
 
     # Define cleaning steps
     cleaning_steps = [
@@ -42,7 +50,7 @@ class GenericClean(TextCleaner, PiiCleaner):
 
     def __init__(self):
         """
-        Initializes the GenericClean instance by calling the __init__ methods of TextCleaner and PiiCleaner.
+        Initializes the GenCleaner instance by calling the __init__ methods of TextCleaner and PiiCleaner.
         """
         TextCleaner.__init__(self)
         PiiCleaner.__init__(self)
