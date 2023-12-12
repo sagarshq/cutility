@@ -79,8 +79,8 @@ class TextCleaner:
         Returns:
             str: The text with web links removed.
         """
-        text = re.sub(r"http\S+", "", text)
-        text = re.sub(r"\w+.com\b", "", text)
+        text = re.sub(r"http\S+", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\w+.com\b", "", text, flags=re.IGNORECASE)
         return text
 
     @staticmethod
@@ -112,7 +112,7 @@ class TextCleaner:
         return text
 
     @staticmethod
-    def clean_punctuations_except(self, exceptions):
+    def clean_punctuations_except(text, exceptions):
         """
         Remove punctuations except specified ones from the text.
 
@@ -124,7 +124,7 @@ class TextCleaner:
             str: The text with punctuations removed except specified ones.
         """
         cleaned_text = "".join(
-            char if char.isalnum() or char in exceptions else " " for char in self.text
+            char if char.isalnum() or char in exceptions else " " for char in text
         )
         return cleaned_text
 
