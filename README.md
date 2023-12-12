@@ -61,21 +61,22 @@ wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285
 Use this snippet to collectively apply multiple cleaning functions
 
 ```python
+from cleaners.clean import GenericClean as cc
 
 all_cleaning_steps = [
     # text cleaning
-    (tc.clean_emojis, {}),
-    (tc.clean_extra_newlines, {}),
-    (tc.clean_extra_spaces, {}),
-    (tc.clean_hashtags, {}),
-    (tc.clean_profile_handle, {}),
-    (tc.clean_symbols_except_punctuation, {}),
-    (tc.clean_unicode_characters, {}),
-    (tc.clean_web_links, {}),
+    (cc.clean_emojis, {}),
+    (cc.clean_extra_newlines, {}),
+    (cc.clean_extra_spaces, {}),
+    (cc.clean_hashtags, {}),
+    (cc.clean_profile_handle, {}),
+    (cc.clean_symbols_except_punctuation, {}),
+    (cc.clean_unicode_characters, {}),
+    (cc.clean_web_links, {}),
     # pii cleaning
-    (pii.replace_contacts, {"repl": " {{CONTACT}} "}),
-    (pii.replace_emails, {"repl": " {{EMAIL}} "}),
-    (pii.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
+    (cc.replace_contacts, {"repl": " {{CONTACT}} "}),
+    (cc.replace_emails, {"repl": " {{EMAIL}} "}),
+    (cc.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
 ]
 
 ```
