@@ -2,7 +2,7 @@
 
 Common utils for faster development
 
-## Installation
+# Installation
 
 You can install `cutility` using pip:
 
@@ -12,6 +12,8 @@ pip install --upgrade cutility
 ```
 
 # Usage
+
+## utils
 
 ### Measure Execution Time
 
@@ -49,6 +51,8 @@ False
 
 ## logger
 
+### simple logger
+
 ```python
 import cutility as cu
 
@@ -59,7 +63,7 @@ log = cu.get_simple_logger()
 log.i("hello world of loggers")
 
 # also supports warning critical debug error messages
-# log.i, log.w, log.e, log.c
+# log.i, log.d, log.w, log.e, log.c
 ```
 
 ```log
@@ -68,6 +72,8 @@ log.i("hello world of loggers")
 ```
 
 ## io
+
+### read write files
 
 Read write files. Currently supports only 3 formats:
 
@@ -93,7 +99,9 @@ yaml_data = cu.read_yaml("./data/example_r.yaml")
 cu.write_yaml(yaml_data, "./data/example_w.yaml")
 ```
 
-## data folder
+## data
+
+### dir handler
 
 Method to standardize access to folders and configs
 
@@ -121,26 +129,15 @@ PROJECT_ROOT = dirh.get_project_root()
 Setting paths:
 Project Root: ./
 Config Path: /path/to/config
-Config Files: []
+Config Files: [list of config files]
 Data Root: ./data
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-## Getting names_list
+## Cleaner
 
-I have curated list of first names and last names
-
-- public github databases and compiled it here in a github gist.
-- references mentioned in the end
-
-Use this command to get names data.
-
-```bash
-wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285a/raw/fbcca7c6821e7aff285271a6ce42361bbe95cc0c/pii_names.json
-```
-
-## Generic cleaner
+### Generic cleaner
 
 Use this snippet to collectively apply multiple cleaning functions
 
@@ -181,7 +178,7 @@ print()
 print(output)
 ```
 
-## Text cleaner
+### Simple Text cleaner
 
 Use this snippet to individually apply simple cleaning functions
 
@@ -194,7 +191,7 @@ print(t)
 
 ```
 
-## PII cleaner
+### PII Text cleaner
 
 Use this snippet to individually apply PII cleaning functions
 
@@ -208,3 +205,22 @@ t = ptc.replace_emails(
 )
 print(t)
 ```
+
+# Appendix
+
+## Getting names_list
+
+I have curated list of first names and last names
+
+- public github databases and compiled it here in a github gist.
+- references mentioned in the end
+
+Use this command to get names data.
+
+```bash
+wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285a/raw/fbcca7c6821e7aff285271a6ce42361bbe95cc0c/pii_names.json
+```
+
+# References
+
+[1] Datasets - [~160k first names ~100k last names](https://github.com/Debdut/names.io) - [Indian Names dataset](https://github.com/MASTREX/List-of-Indian-Names)
