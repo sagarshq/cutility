@@ -9,13 +9,21 @@ pip install twine setuptools
 
 ```bash
 # test locally
-pip3 install .
+pip install . --no-cache-dir
 
 # run setup.py
 python setup.py sdist
 
 # upload to pypi
 python -m twine upload --repository pypi dist/*
+```
+
+# cleanup
+
+```bash
+
+# rm __pycache__
+find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
 ```
 
 # ref

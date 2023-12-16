@@ -2,18 +2,18 @@
 Class to call all cleaners
 """
 
-from .pii_cleaner import PiiCleaner
-from .text_cleaner import TextCleaner
+from .pii_cleaner import PiiTextCleaner
+from .text_cleaner import SimpleTextCleaner
 
 
-class GenericTextCleaner(TextCleaner, PiiCleaner):
+class GenericSimpleTextCleaner(SimpleTextCleaner, PiiTextCleaner):
     """
-    A utility class for generic text cleaning operations, combining functionality from TextCleaner and PiiCleaner.
+    A utility class for generic text cleaning operations, combining functionality from SimpleTextCleaner and PiiTextCleaner.
 
     Example:
     ```python
-    # Create an instance of GenericTextCleaner
-    generic_cleaner = GenericTextCleaner()
+    # Create an instance of GenericSimpleTextCleaner
+    generic_cleaner = GenericSimpleTextCleaner()
 
     # Define cleaning steps
     cleaning_steps = [
@@ -35,7 +35,7 @@ class GenericTextCleaner(TextCleaner, PiiCleaner):
     ```
 
     Attributes:
-    - Inherits functionality from TextCleaner and PiiCleaner.
+    - Inherits functionality from SimpleTextCleaner and PiiTextCleaner.
 
     Methods:
     - `apply_text_cleaning_functions(input_text, cleaning_steps)`: Apply a sequence of cleaning functions to the input text.
@@ -50,10 +50,10 @@ class GenericTextCleaner(TextCleaner, PiiCleaner):
 
     def __init__(self):
         """
-        Initializes the GenericTextCleaner instance by calling the __init__ methods of TextCleaner and PiiCleaner.
+        Initializes the GenericSimpleTextCleaner instance by calling the __init__ methods of SimpleTextCleaner and PiiTextCleaner.
         """
-        TextCleaner.__init__(self)
-        PiiCleaner.__init__(self)
+        SimpleTextCleaner.__init__(self)
+        PiiTextCleaner.__init__(self)
 
     def apply_text_cleaning_functions(self, input_text, cleaning_steps):
         """

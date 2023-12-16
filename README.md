@@ -1,22 +1,101 @@
 # cutility
 
-Common utils for development
+Common utils for faster development
 
 ## Installation
 
-You can install TextCleaner using pip:
+You can install `cutility` using pip:
 
 ```bash
-# install cutility
-pip install cutility
-```
-
-```bash
-# latest version
+# to update to latest version
 pip install --upgrade cutility
 ```
 
-## Variables
+# Usage
+
+### Measure Execution Time
+
+```python
+import cutility as cu
+
+@cu.get_exec_time
+def foo():
+    import time
+    time.sleep(1)
+
+foo()
+```
+
+Output:
+
+```markdown
+Time taken to execute 'foo': 0:00:01.005044
+```
+
+### Check Path Existence
+
+```python
+import cutility as cu
+
+b = cu.check_path_exist("./data/temp.txt")
+print(b)
+```
+
+Output:
+
+```markdown
+False
+```
+
+## logger
+
+```python
+import cutility as cu
+
+# Create a simple logger instance
+log = cu.get_simple_logger()
+
+# Log an information message
+log.i("hello world of loggers")
+
+# also supports warning critical debug error messages
+# log.i, log.w, log.e, log.c
+```
+
+```log
+# output
+[2023-12-17 02:21:03,847] - [INFO] : hello world of loggers
+```
+
+## io
+
+Read write files. Currently supports only 3 formats:
+
+- text
+- json
+- yaml
+
+```python
+
+import cutility as cu
+
+# Example 1: Reading and Writing a text file
+file_content = cu.read_text("./data/example_r.txt")
+cu.write_text(file_content, "./data/example_w.txt")
+
+# Example 2: Reading and Writing a JSON file
+json_data = cu.read_json("./data/example_r.json")
+cu.write_json(json_data, "./data/example_w.json")
+
+
+# Example 3: Reading and Writing a YAML file
+yaml_data = cu.read_yaml("./data/example_r.yaml")
+cu.write_yaml(yaml_data, "./data/example_w.yaml")
+```
+
+## data folder
+
+Method to standardize access to folders and configs
 
 What is `project_root`?
 
@@ -26,30 +105,35 @@ What is `data_root`?
 
 - Directory that holds all your data folder is your `data_root`
 
-# Usage
-
-## data folders and logger
-
 ```python
-from cutility import cutils, logger
+from cutility.cutils import Cutils
 
-# add data folder as per your preference
-# add config folder as per your preference
-cu = cutils.Cutils(
-                    data_root=f"path/to/data/folder",
-                    config_root=f"path/to/config/folder", # currently only supports .yml files
-                    verbose=True
-)
+# Create an instance of Cutils
+dirh = Cutils(project_root="./", data_root="./data", verbose=True)
 
+# Print project and data root paths
+DATA_ROOT = dirh.get_data_root()
+PROJECT_ROOT = dirh.get_project_root()
+```
 
-log = logger.Logger()
-log.i("This is info message")
-# also supports warning critical debug messages
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setting paths:
+Project Root: ./
+Config Path: /path/to/config
+Config Files: []
+Data Root: ./data
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 ## Getting names_list
 
-I have curated list of first names and last names from public github databases and compiled it here in a github gist.
+I have curated list of first names and last names
+
+- public github databases and compiled it here in a github gist.
+- references mentioned in the end
+
 Use this command to get names data.
 
 ```bash
@@ -61,24 +145,40 @@ wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285
 Use this snippet to collectively apply multiple cleaning functions
 
 ```python
-from cutility.cleaners.clean import GenCleaner as cc
+from cutility.cleaners import GenericSimpleTextCleaner
+from typing import List, Dict, Tuple, Any, Callable
 
+# Create an instance of GenericSimpleTextCleaner
+gtc = GenericSimpleTextCleaner()
+
+# Sample text
+sample_text = """Check out this link: https://example.com. 😎 #Python @user1, sample@gmail.com 123-456-7908 #testing # python"""
+
+# List of names for name replacement
+names_list = ["John", "Doe", "Jane", "Smith"]
+
+# Define cleaning steps
 all_cleaning_steps = [
-    # text cleaning
-    (cc.clean_emojis, {}),
-    (cc.clean_extra_newlines, {}),
-    (cc.clean_extra_spaces, {}),
-    (cc.clean_hashtags, {}),
-    (cc.clean_profile_handle, {}),
-    (cc.clean_symbols_except_punctuation, {}),
-    (cc.clean_unicode_characters, {}),
-    (cc.clean_web_links, {}),
-    # pii cleaning
-    (cc.replace_contacts, {"repl": " {{CONTACT}} "}),
-    (cc.replace_emails, {"repl": " {{EMAIL}} "}),
-    (cc.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
+    (gtc.replace_contacts, {"repl": " {{PHONE}} "}),
+    (gtc.replace_emails, {"repl": " {{EMAIL}} "}),
+    (gtc.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
+    (gtc.clean_emojis, {}),
+    (gtc.clean_extra_newlines, {}),
+    (gtc.clean_extra_spaces, {}),
+    (gtc.clean_hashtags, {}),
+    (gtc.clean_profile_handle, {}),
+    (gtc.clean_punctuations_except, {"exceptions": [",", ".", "\n", "?", "}", "{"]}),
+    (gtc.clean_unicode_characters, {}),
+    (gtc.clean_web_links, {}),
 ]
 
+# Apply text cleaning functions
+output = gtc.apply_text_cleaning_functions(sample_text, all_cleaning_steps)
+
+# Print the original and cleaned text
+print(sample_text)
+print()
+print(output)
 ```
 
 ## Text cleaner
@@ -86,34 +186,12 @@ all_cleaning_steps = [
 Use this snippet to individually apply simple cleaning functions
 
 ```python
-# Import the TextCleaner class
-from cleaners.text_cleaner import TextCleaner
+# simpler text cleaner
+from cutility.cleaners import SimpleTextCleaner as stc
 
-# Create an instance of TextCleaner
-tc = TextCleaner()
+t = stc.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
+print(t)
 
-# Sample text for demonstration
-sample_text = "Check out this link: https://example.com. 😎 #Python @user1"
-
-# Step 1: Clean web links
-text_without_links = tc.clean_web_links(sample_text)
-
-# Step 2: Clean profile handles
-text_without_handles = tc.clean_profile_handle(text_without_links)
-
-# Step 3: Clean hashtags
-text_without_hashtags = tc.clean_hashtags(text_without_handles)
-
-# Step 4: Clean emojis
-text_without_emojis = tc.clean_emojis(text_without_hashtags)
-
-# Step 5: Clean extra spaces
-final_cleaned_text = tc.clean_extra_spaces(text_without_emojis)
-```
-
-```python
-# output
-'Check out this link: '
 ```
 
 ## PII cleaner
@@ -121,24 +199,12 @@ final_cleaned_text = tc.clean_extra_spaces(text_without_emojis)
 Use this snippet to individually apply PII cleaning functions
 
 ```python
-from cleaners.pii_cleaner import PiiCleaner
-pc = PiiCleaner()
-text_with_pii = "John's email is john.doe@example.com, and his phone number is +1 555-1234."
+from cutility.cleaners import PiiTextCleaner as ptc
 
-# Replace names with a generic string
-text_without_names = pc.replace_names(text_with_pii, names_list=["John", "Doe", "Jane", "Smith"], repl='{{PERSON_NAME}}')
-
-# Replace emails with a generic string
-text_without_emails = pc.replace_emails(text_without_names, repl='{{EMAIL}}')
-
-# Replace phone numbers with a generic string
-text_without_contacts = pc.replace_contacts(text_without_emails, repl='{{PHONE}}')
-
-print(text_with_pii)
-print(text_without_contacts)
-```
-
-```python
-# output
-"{{PERSON_NAME}}'s email is {{EMAIL}}, and his phone number is {{PHONE}}."
+t = ptc.replace_emails(
+    ptc.replace_contacts(
+        "My contact number is +1(123) 456 7890 and my email is email@company.com"
+    )
+)
+print(t)
 ```

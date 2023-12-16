@@ -1,7 +1,7 @@
-from cutility.cleaners import GenericTextCleaner
+from cutility.cleaners import GenericSimpleTextCleaner
 
 
-gtc = GenericTextCleaner()
+gtc = GenericSimpleTextCleaner()
 
 sample_text = """Check out this link: https://example.com. 😎 #Python @user1, sample@gmail.com 123-456-7908 #testing # python"""
 
@@ -34,11 +34,19 @@ print(output)
 
 
 print("-" * 30)
-# individual tests
-t = gtc.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
+# simpler text cleaner
+from cutility.cleaners import SimpleTextCleaner as stc
+
+t = stc.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
 print(t)
 
 print("-" * 30)
-# individual tests
-t = gtc.replace_contacts("My contact number is +1(123) 456 7890")
+# pii text cleaner
+from cutility.cleaners import PiiTextCleaner as ptc
+
+t = ptc.replace_emails(
+    ptc.replace_contacts(
+        "My contact number is +1(123) 456 7890 and my email is email@company.com"
+    )
+)
 print(t)

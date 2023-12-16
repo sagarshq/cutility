@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="cutility",
-    version="0.1.1",
+    version="0.1.2",
     author="Sagar Sarkale",
     author_email="sagarsarkale.work@gmail.com",
     description="Common Utility functions for development",
@@ -21,6 +21,8 @@ setup(
     packages=find_packages(),
     python_requires=">=3.7",
     install_requires=[
+        "simplejson",
+        # "jsonl",
         "pyyaml",
         # Add other dependencies here if needed
     ],

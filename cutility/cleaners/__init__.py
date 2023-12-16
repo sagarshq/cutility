@@ -1,9 +1,9 @@
 __all__ = [
-    "GenericTextCleaner",
-    "TextCleaner",
-    "PiiCleaner",
+    "GenericSimpleTextCleaner",
+    "SimpleTextCleaner",
+    "PiiTextCleaner",
 ]
 
-from .clean import GenericTextCleaner
-from .text_cleaner import TextCleaner
-from .pii_cleaner import PiiCleaner
+from .clean import GenericSimpleTextCleaner
+from .text_cleaner import SimpleTextCleaner
+from .pii_cleaner import PiiTextCleaner

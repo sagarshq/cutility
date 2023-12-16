@@ -1,7 +1,7 @@
 import re
 
 
-class PiiCleaner:
+class PiiTextCleaner:
     """
     Handle Personal Identifiable Information (PII) removal/replacement tasks.
 
@@ -23,7 +23,7 @@ class PiiCleaner:
 
     Example Usage:
     ```python
-    pii_handler = PiiCleaner()
+    pii_handler = PiiTextCleaner()
     text_with_pii = "John Doe's email is john.doe@example.com, and his phone number is +1 555-1234."
 
     # Replace names with a generic string
@@ -60,7 +60,7 @@ class PiiCleaner:
 
         Example:
         ```python
-        pii_handler = PiiCleaner()
+        pii_handler = PiiTextCleaner()
         text = "John Doe and Jane Smith are examples of names."
         text_without_names = pii_handler.replace_names(text, names_list=["John Doe", "Jane Smith"])
         print(text_without_names)
@@ -91,7 +91,7 @@ class PiiCleaner:
 
         Example:
         ```python
-        pii_handler = PiiCleaner()
+        pii_handler = PiiTextCleaner()
         text = "Contact us at support@example.com for assistance."
         text_without_emails = pii_handler.replace_emails(text)
         print(text_without_emails)
@@ -115,7 +115,7 @@ class PiiCleaner:
 
         Example:
         ```python
-        pii_handler = PiiCleaner()
+        pii_handler = PiiTextCleaner()
         text = "Contact us at +1 555-123-4567 or 9876543210 for assistance."
         text_without_contacts = pii_handler.replace_contacts(text)
         print(text_without_contacts)

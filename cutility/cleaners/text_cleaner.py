@@ -6,7 +6,7 @@ import re
 import string
 
 
-class TextCleaner:
+class SimpleTextCleaner:
     """
     Methods:
        clean_emojis(text): Remove emojis and skin tone modifiers from the given text.
@@ -17,7 +17,6 @@ class TextCleaner:
        clean_punctuations_except(text, exceptions): Remove punctuations except specified ones in the text.
        clean_extra_spaces(text): Replace consecutive spaces with a single space in the text.
        clean_extra_newlines(text): Replace consecutive newlines with a single newline in the text.
-       clean_symbols_except_punctuation(text): Remove symbols except punctuation from the text.
     """
 
     def __init__(self):
