@@ -1,6 +1,34 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [cutility](#cutility)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [utils](#utils)
+    - [Measure Execution Time](#measure-execution-time)
+    - [Check Path Existence](#check-path-existence)
+  - [logger](#logger)
+    - [simple logger](#simple-logger)
+  - [io](#io)
+    - [read write files](#read-write-files)
+  - [data](#data)
+    - [dir handler](#dir-handler)
+  - [Cleaner](#cleaner)
+    - [Generic cleaner](#generic-cleaner)
+    - [Simple Text cleaner](#simple-text-cleaner)
+    - [PII Text cleaner](#pii-text-cleaner)
+- [Appendix](#appendix)
+  - [Getting names_list](#getting-names_list)
+- [References](#references)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="cutility"></a>
+
 # cutility
 
 Common utils for faster development
+
+<!-- TOC --><a name="installation"></a>
 
 # Installation
 
@@ -11,9 +39,15 @@ You can install `cutility` using pip:
 pip install --upgrade cutility
 ```
 
+<!-- TOC --><a name="usage"></a>
+
 # Usage
 
+<!-- TOC --><a name="utils"></a>
+
 ## utils
+
+<!-- TOC --><a name="measure-execution-time"></a>
 
 ### Measure Execution Time
 
@@ -34,6 +68,8 @@ Output:
 Time taken to execute 'foo': 0:00:01.005044
 ```
 
+<!-- TOC --><a name="check-path-existence"></a>
+
 ### Check Path Existence
 
 ```python
@@ -49,7 +85,11 @@ Output:
 False
 ```
 
+<!-- TOC --><a name="logger"></a>
+
 ## logger
+
+<!-- TOC --><a name="simple-logger"></a>
 
 ### simple logger
 
@@ -66,12 +106,17 @@ log.i("hello world of loggers")
 # log.i, log.d, log.w, log.e, log.c
 ```
 
+Output:
+
 ```log
-# output
 [2023-12-17 02:21:03,847] - [INFO] : hello world of loggers
 ```
 
+<!-- TOC --><a name="io"></a>
+
 ## io
+
+<!-- TOC --><a name="read-write-files"></a>
 
 ### read write files
 
@@ -99,7 +144,11 @@ yaml_data = cu.read_yaml("./data/example_r.yaml")
 cu.write_yaml(yaml_data, "./data/example_w.yaml")
 ```
 
+<!-- TOC --><a name="data"></a>
+
 ## data
+
+<!-- TOC --><a name="dir-handler"></a>
 
 ### dir handler
 
@@ -124,6 +173,8 @@ DATA_ROOT = dirh.get_data_root()
 PROJECT_ROOT = dirh.get_project_root()
 ```
 
+Output:
+
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Setting paths:
@@ -135,7 +186,11 @@ Data Root: ./data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
+<!-- TOC --><a name="cleaner"></a>
+
 ## Cleaner
+
+<!-- TOC --><a name="generic-cleaner"></a>
 
 ### Generic cleaner
 
@@ -178,6 +233,8 @@ print()
 print(output)
 ```
 
+<!-- TOC --><a name="simple-text-cleaner"></a>
+
 ### Simple Text cleaner
 
 Use this snippet to individually apply simple cleaning functions
@@ -190,6 +247,8 @@ t = stc.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
 print(t)
 
 ```
+
+<!-- TOC --><a name="pii-text-cleaner"></a>
 
 ### PII Text cleaner
 
@@ -206,7 +265,11 @@ t = ptc.replace_emails(
 print(t)
 ```
 
+<!-- TOC --><a name="appendix"></a>
+
 # Appendix
+
+<!-- TOC --><a name="getting-names_list"></a>
 
 ## Getting names_list
 
@@ -220,6 +283,8 @@ Use this command to get names data.
 ```bash
 wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285a/raw/fbcca7c6821e7aff285271a6ce42361bbe95cc0c/pii_names.json
 ```
+
+<!-- TOC --><a name="references"></a>
 
 # References
 
