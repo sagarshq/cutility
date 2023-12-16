@@ -288,4 +288,7 @@ wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285
 
 # References
 
-[1] Datasets - [~160k first names ~100k last names](https://github.com/Debdut/names.io) - [Indian Names dataset](https://github.com/MASTREX/List-of-Indian-Names)
+[1] PII names datasets:
+
+- [~160k first names ~100k last names](https://github.com/Debdut/names.io)
+- [Indian Names dataset](https://github.com/MASTREX/List-of-Indian-Names)
