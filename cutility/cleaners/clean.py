@@ -6,14 +6,14 @@ from .pii_cleaner import PiiCleaner
 from .text_cleaner import TextCleaner
 
 
-class GenCleaner(TextCleaner, PiiCleaner):
+class GenericTextCleaner(TextCleaner, PiiCleaner):
     """
     A utility class for generic text cleaning operations, combining functionality from TextCleaner and PiiCleaner.
 
     Example:
     ```python
-    # Create an instance of GenCleaner
-    generic_cleaner = GenCleaner()
+    # Create an instance of GenericTextCleaner
+    generic_cleaner = GenericTextCleaner()
 
     # Define cleaning steps
     cleaning_steps = [
@@ -50,7 +50,7 @@ class GenCleaner(TextCleaner, PiiCleaner):
 
     def __init__(self):
         """
-        Initializes the GenCleaner instance by calling the __init__ methods of TextCleaner and PiiCleaner.
+        Initializes the GenericTextCleaner instance by calling the __init__ methods of TextCleaner and PiiCleaner.
         """
         TextCleaner.__init__(self)
         PiiCleaner.__init__(self)

@@ -8,10 +8,10 @@ from datetime import datetime
 from glob import glob
 
 
-class Cutils:
+class DirHandler:
     """
     A utility class providing common functionalities for working with
-    configurations, paths, directories, and function execution time.
+    configurations, paths, directories
     """
 
     def __init__(
@@ -24,7 +24,7 @@ class Cutils:
         verbose=False,
     ):
         """
-        Initializes the Cutils instance.
+        Initializes the DirHandler instance.
 
         Args:
             project_root (str): The root path of the project. Defaults to the current directory.
@@ -112,8 +112,8 @@ class Cutils:
             To create a directory structure in the 'project_root' with specific paths:
 
             ```python
-            cutils_instance = Cutils()
-            cutils_instance.make_directory_structure(cutils_instance.project_root, ['dir1', 'dir2'])
+            dirh = DirHandler()
+            dirh.make_directory_structure(dirh.project_root, ['dir1', 'dir2'])
             ```
 
             This will create the following structure:
@@ -126,38 +126,3 @@ class Cutils:
         if local_paths is not None:
             for p in local_paths:
                 os.makedirs(f"{prefix}/{p}", exist_ok=True)
-
-    @staticmethod
-    def check_path_exist(path):
-        """
-        Check if a path exists.
-
-        Args:
-            path (str): The path to check.
-
-        Returns:
-            bool: True if the path exists, False otherwise.
-        """
-        return os.path.exists(path)
-
-    @staticmethod
-    def measure_time(func):
-        """
-        Decorator function to measure the execution time of another function.
-
-        Args:
-            func (callable): The function to be measured.
-
-        Returns:
-            callable: The wrapper function that measures and prints the execution time.
-        """
-
-        def wrapper(*args, **kwargs):
-            t0 = datetime.now()
-            result = func(*args, **kwargs)
-            t1 = datetime.now()
-            execution_time = t1 - t0
-            print(f"Time taken to execute '{func.__name__}': {execution_time}")
-            return result
-
-        return wrapper

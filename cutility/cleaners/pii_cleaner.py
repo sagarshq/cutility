@@ -128,6 +128,6 @@ class PiiCleaner:
         combined_pattern = re.compile(f"{pattern1}|{pattern2}")
 
         # Replace phone numbers with an empty string
-        cleaned_text = combined_pattern.sub("", text)
+        cleaned_text = combined_pattern.sub(repl, text)
 
         return cleaned_text

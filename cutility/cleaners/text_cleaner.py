@@ -155,18 +155,3 @@ class TextCleaner:
         """
         text = re.sub(r"\n+", "\n", text)
         return text
-
-    @staticmethod
-    def clean_symbols_except_punctuation(text):
-        """
-        Remove symbols except punctuation from the given text.
-
-        Args:
-            text (str): The input text.
-
-        Returns:
-            str: The text with symbols removed except punctuation.
-        """
-        translator = str.maketrans("", "", string.punctuation)
-        text = text.translate(translator)
-        return text
