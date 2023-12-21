@@ -163,14 +163,12 @@ What is `data_root`?
 - Directory that holds all your data folder is your `data_root`
 
 ```python
-from cutility.cutils import Cutils
+from cutility.dir import dir_handler
 
-# Create an instance of Cutils
-dirh = Cutils(project_root="./", data_root="./data", verbose=True)
+dirh = dir_handler.DirHandler(project_root="./", data_root="./data", verbose=True)
+print(dirh.get_data_root())
+print(dirh.get_project_root())
 
-# Print project and data root paths
-DATA_ROOT = dirh.get_data_root()
-PROJECT_ROOT = dirh.get_project_root()
 ```
 
 Output:
