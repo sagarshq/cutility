@@ -19,6 +19,7 @@ from cutility.loggers import (
 from cutility.utils.exec_time import get_exec_time
 from cutility.utils.path import check_path_exist
 from cutility.dir import get_dir_handler
+from cutility.utils.env_loader import load_env
 
 # text cleaners
 from cutility.cleaners import GenericSimpleTextCleaner as text_cleaner

@@ -24,6 +24,7 @@ setup(
         "simplejson",
         # "jsonl",
         "pyyaml",
+        "python-dotenv"
         # Add other dependencies here if needed
     ],
 )

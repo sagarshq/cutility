@@ -10,6 +10,8 @@
     - [simple logger](#simple-logger)
   - [io](#io)
     - [read write files](#read-write-files)
+  - [env](#env)
+    - [load_env](#load_env)
   - [data](#data)
     - [dir handler](#dir-handler)
   - [Cleaner](#cleaner)
@@ -146,6 +148,42 @@ cu.write_yaml(yaml_data, "./data/example_w.yaml")
 
 <!-- TOC --><a name="data"></a>
 
+## env
+
+### load_env
+
+<!-- TOC --><a name="env loader"></a>
+
+.env file format
+
+```text
+PROJECT_ROOT=/path/to/src
+DATA_ROOT=/path/to/data
+CONFIG_PATH=/path/to/config.yml
+```
+
+```python
+# load env variables
+
+import os
+from cutility import load_env
+
+ENV = load_env("./.env")
+print(ENV)
+print(os.getenv("DATA_ROOT"))
+print(os.getenv("PROJECT_ROOT"))
+print(os.getenv("CONFIG_PATH"))
+```
+
+Output:
+
+```
+True
+/path/to/data
+/path/to/src
+/path/to/config.yml
+```
+
 ## data
 
 <!-- TOC --><a name="dir-handler"></a>
@@ -168,7 +206,6 @@ from cutility import get_dir_handler
 dirh = get_dir_handler(project_root="./", data_root="./data", verbose=True)
 print(dirh.get_data_root())
 print(dirh.get_project_root())
-
 
 ```
 
