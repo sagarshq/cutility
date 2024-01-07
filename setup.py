@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="cutility",
-    version="0.1.3",
+    version="0.1.4",
     author="Sagar Sarkale",
     author_email="sagarsarkale.work@gmail.com",
     description="Common Utility functions for development",
