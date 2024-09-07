@@ -1,3 +1,7 @@
 [build-system]
-requires = ["setuptools>=60", "wheel"]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/cutility/_version.py"
+local_scheme = "no-local-version"

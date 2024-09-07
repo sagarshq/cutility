@@ -3,9 +3,15 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as readme_file:
     long_description = readme_file.read()
 
+
+def local_scheme(version):
+    return ""
+
+
 setup(
     name="cutility",
     use_scm_version={
+        "local_scheme": local_scheme,
         "write_to": "src/cutility/_version.py",
     },
     setup_requires=["setuptools>=42", "setuptools_scm"],
