@@ -5,7 +5,8 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="cutility",
-    version="0.1.5",
+    use_scm_version=True,  # Use setuptools_scm for versioning
+    setup_requires=["setuptools>=42", "setuptools_scm"],
     author="Sagar Sarkale",
     author_email="sagarsarkale.work@gmail.com",
     description="Common Utility functions for development",
