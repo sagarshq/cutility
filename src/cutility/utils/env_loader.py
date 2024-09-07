@@ -11,9 +11,9 @@ def load_env(env_path):
     Returns:
         None
 
-    Raises:
-        FileNotFoundError: If the specified .env file is not found.
-        Exception: If there are issues loading the environment variables.
+    Example Usage:
+    ```python
+    load_env(".env")
+    ```
     """
-
     return load_dotenv(env_path)

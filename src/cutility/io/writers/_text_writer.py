@@ -8,6 +8,11 @@ def write(text, file_path):
 
     Returns:
         None
+
+    Example Usage:
+    ```python
+    write("Hello, world!", "output.txt")
+    ```
     """
     with open(file_path, "w") as file:
         file.write(text)
