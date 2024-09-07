@@ -8,15 +8,25 @@ import string
 
 class SimpleTextCleaner:
     """
+    Provides basic text cleaning methods.
+
     Methods:
-       clean_emojis(text): Remove emojis and skin tone modifiers from the given text.
-       clean_unicode_characters(text): Remove non-ASCII characters from the given text.
-       clean_web_links(text): Remove web links from the given text.
-       clean_profile_handle(text): Remove '@username' mentions from profile handles in the text.
-       clean_hashtags(text): Remove '#' symbols from hashtags in the text.
-       clean_punctuations_except(text, exceptions): Remove punctuations except specified ones in the text.
-       clean_extra_spaces(text): Replace consecutive spaces with a single space in the text.
-       clean_extra_newlines(text): Replace consecutive newlines with a single newline in the text.
+    - clean_emojis(text): Remove emojis from the given text.
+    - clean_unicode_characters(text): Remove non-ASCII characters from the given text.
+    - clean_web_links(text): Remove web links from the given text.
+    - clean_profile_handle(text): Remove '@username' mentions from profile handles in the text.
+    - clean_hashtags(text): Remove '#' symbols from hashtags in the text.
+    - clean_punctuations_except(text, exceptions): Remove punctuations except specified ones in the text.
+    - clean_extra_spaces(text): Replace consecutive spaces with a single space in the text.
+    - clean_extra_newlines(text): Replace consecutive newlines with a single newline in the text.
+
+    Example Usage:
+    ```python
+    cleaner = SimpleTextCleaner()
+    text = "Hello 😊 world! #hashtag @username"
+    cleaned_text = cleaner.clean_emojis(text)
+    print(cleaned_text)  # Output: "Hello  world! #hashtag @username"
+    ```
     """
 
     def __init__(self):

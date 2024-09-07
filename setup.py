@@ -5,7 +5,8 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="cutility",
-    version="0.1.5",
+    use_scm_version=True,  # Use setuptools_scm for versioning
+    setup_requires=["setuptools>=42", "setuptools_scm"],
     author="Sagar Sarkale",
     author_email="sagarsarkale.work@gmail.com",
     description="Common Utility functions for development",
@@ -18,13 +19,8 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Utilities",
     ],
-    packages=find_packages(),
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     python_requires=">=3.7",
-    install_requires=[
-        "simplejson",
-        # "jsonl",
-        "pyyaml",
-        "python-dotenv"
-        # Add other dependencies here if needed
-    ],
+    install_requires=["simplejson", "pyyaml", "python-dotenv"],
 )

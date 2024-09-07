@@ -7,6 +7,12 @@ def read(file_path):
 
     Returns:
         str: The text read from the file.
+
+    Example Usage:
+    ```python
+    text = read("example.txt")
+    print(text)
+    ```
     """
     with open(file_path, "r") as file:
         return file.read()
