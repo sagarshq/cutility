@@ -1,5 +1,13 @@
 from setuptools import setup, find_packages
-from setuptools_scm.version import get_local_node_and_date
+
+# Dynamically install setuptools_scm if not available
+try:
+    from setuptools_scm import get_version
+except ImportError:
+    import subprocess
+
+    subprocess.check_call(["pip", "install", "setuptools_scm"])
+    from setuptools_scm import get_version
 
 with open("README.md", "r", encoding="utf-8") as readme_file:
     long_description = readme_file.read()
@@ -12,7 +20,7 @@ def local_scheme(version):
 setup(
     name="cutility",
     use_scm_version={
-        "local_scheme": local_scheme,  # Avoid local versions
+        "local_scheme": local_scheme,
         "write_to": "src/cutility/_version.py",
     },
     setup_requires=["setuptools>=42", "setuptools_scm"],
@@ -32,10 +40,4 @@ setup(
     packages=find_packages(where="src"),
     python_requires=">=3.7",
     install_requires=["simplejson", "pyyaml", "python-dotenv"],
-    # Optional: Add entry points if you have console scripts
-    # entry_points={
-    #     "console_scripts": [
-    #         "your_command=your_module:main_function",
-    #     ],
-    # },
 )
