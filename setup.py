@@ -10,6 +10,7 @@ def local_scheme(version):
 
 setup(
     name="cutility",
+    version="1.0.1",
     use_scm_version={
         "local_scheme": local_scheme,
         "write_to": "src/cutility/_version.py",
