@@ -1,9 +1,9 @@
-__all__ = [
-    "GenericSimpleTextCleaner",
-    "SimpleTextCleaner",
-    "PiiTextCleaner",
-]
+"""
+Expose functions
+"""
 
 from .clean import GenericSimpleTextCleaner
-from .text_cleaner import SimpleTextCleaner
 from .pii_cleaner import PiiTextCleaner
+from .text_cleaner import SimpleTextCleaner
+
+__all__ = ["GenericSimpleTextCleaner", "PiiTextCleaner", "SimpleTextCleaner"]

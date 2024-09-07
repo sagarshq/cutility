@@ -2,7 +2,8 @@
 Measure exectution time of a function
 """
 
-from datetime import datetime
+import time
+from functools import wraps
 
 
 def get_exec_time(func):
@@ -16,12 +17,14 @@ def get_exec_time(func):
         callable: The wrapper function that measures and prints the execution time.
     """
 
+    @wraps(func)
     def wrapper(*args, **kwargs):
-        t0 = datetime.now()
+        start_time = time.time()
         result = func(*args, **kwargs)
-        t1 = datetime.now()
-        execution_time = t1 - t0
-        print(f"Time taken to execute '{func.__name__}': {execution_time}")
+        end_time = time.time()
+        print(
+            f"Time taken to execute '{func.__name__}': {end_time - start_time:.6f} seconds"
+        )
         return result
 
     return wrapper

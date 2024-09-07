@@ -56,20 +56,21 @@ class GenericSimpleTextCleaner(SimpleTextCleaner, PiiTextCleaner):
         PiiTextCleaner.__init__(self)
 
     def apply_text_cleaning_functions(self, input_text, cleaning_steps):
-        """
-        Apply a sequence of cleaning functions to the input text.
-
-        Args:
-        - input_text (str): The original text to be cleaned.
-        - cleaning_steps (list): A list of tuples, each containing a cleaning function and its arguments.
-
-        Returns:
-        - str: The text after applying all specified cleaning functions sequentially.
-        """
         cleaned_text = input_text
+        print(f"Original text: {cleaned_text}")
 
-        # Iterate through each cleaning step and apply the corresponding function
         for cleaning_func, cleaning_args in cleaning_steps:
-            cleaned_text = cleaning_func(cleaned_text, **cleaning_args)
+            func_name = cleaning_func.__name__
+            if func_name in ["replace_emails", "replace_contacts", "replace_names"]:
+                # Use PiiTextCleaner methods directly
+                cleaned_text = getattr(PiiTextCleaner, func_name)(
+                    cleaned_text, **cleaning_args
+                )
+            else:
+                # Use SimpleTextCleaner methods
+                cleaned_text = getattr(SimpleTextCleaner, func_name)(
+                    cleaned_text, **cleaning_args
+                )
+            print(f"After {func_name}: {cleaned_text}")
 
         return cleaned_text

@@ -18,13 +18,8 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Utilities",
     ],
-    packages=find_packages(),
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     python_requires=">=3.7",
-    install_requires=[
-        "simplejson",
-        # "jsonl",
-        "pyyaml",
-        "python-dotenv"
-        # Add other dependencies here if needed
-    ],
+    install_requires=["simplejson", "pyyaml", "python-dotenv"],
 )

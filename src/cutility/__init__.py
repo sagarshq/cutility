@@ -1,13 +1,5 @@
-__all__ = ["DirHandler"]
+from .utils.exec_time import get_exec_time
+from .utils.path import check_path_exist
+from .utils.env_loader import load_env
 
-import os
-from .dir_handler import DirHandler
-
-
-def get_dir_handler(
-    project_root=os.path.abspath(os.curdir),
-    data_root=os.getenv("DATA_ROOT", f"{os.path.abspath(os.curdir)}/src/data"),
-    config_root=os.getenv("CONFIG_ROOT", f"{os.path.abspath(os.curdir)}/src/config"),
-    verbose=False,
-):
-    return DirHandler(project_root, data_root, config_root, verbose)
+__all__ = ["get_exec_time", "check_path_exist", "load_env"]

@@ -1,6 +1,7 @@
 """
 Expose functions
 """
+
 __all__ = [
     "get_simple_logger",
 ]
