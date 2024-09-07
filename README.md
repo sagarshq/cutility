@@ -1,172 +1,69 @@
-<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
-
-- [cutility](#cutility)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [utils](#utils)
-    - [Measure Execution Time](#measure-execution-time)
-    - [Check Path Existence](#check-path-existence)
-  - [logger](#logger)
-    - [simple logger](#simple-logger)
-  - [io](#io)
-    - [read write files](#read-write-files)
-  - [env](#env)
-    - [load_env](#load_env)
-  - [data](#data)
-    - [dir handler](#dir-handler)
-  - [Cleaner](#cleaner)
-    - [Generic cleaner](#generic-cleaner)
-    - [Simple Text cleaner](#simple-text-cleaner)
-    - [PII Text cleaner](#pii-text-cleaner)
-- [Appendix](#appendix)
-  - [Getting names_list](#getting-names_list)
-- [References](#references)
-
-<!-- TOC end -->
-
-<!-- TOC --><a name="cutility"></a>
-
 # cutility
 
-Common utils for faster development
+Common utilities for faster development
 
-<!-- TOC --><a name="installation"></a>
+## Table of Contents
 
-# Installation
+- [cutility](#cutility)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Utils](#utils)
+      - [Measure Execution Time](#measure-execution-time)
+      - [Check Path Existence](#check-path-existence)
+      - [Load Environment Variables](#load-environment-variables)
+    - [Loggers](#loggers)
+      - [Simple Logger](#simple-logger)
+    - [IO](#io)
+      - [Read and Write Files](#read-and-write-files)
+    - [Dir Handler](#dir-handler)
+    - [Cleaners](#cleaners)
+      - [Generic Cleaner](#generic-cleaner)
+      - [Simple Text Cleaner](#simple-text-cleaner)
+      - [PII Text Cleaner](#pii-text-cleaner)
+  - [Project Structure](#project-structure)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## Installation
 
 You can install `cutility` using pip:
 
 ```bash
-# to update to latest version
 pip install --upgrade cutility
 ```
 
-<!-- TOC --><a name="usage"></a>
+## Usage
 
-# Usage
+### Utils
 
-<!-- TOC --><a name="utils"></a>
-
-## utils
-
-<!-- TOC --><a name="measure-execution-time"></a>
-
-### Measure Execution Time
+#### Measure Execution Time
 
 ```python
-import cutility as cu
+from cutility.utils import get_exec_time
 
-@cu.get_exec_time
+@get_exec_time
 def foo():
     import time
     time.sleep(1)
 
 foo()
+# Output: Time taken to execute 'foo': 0:00:01.005044
 ```
 
-Output:
-
-```markdown
-Time taken to execute 'foo': 0:00:01.005044
-```
-
-<!-- TOC --><a name="check-path-existence"></a>
-
-### Check Path Existence
+#### Check Path Existence
 
 ```python
-import cutility as cu
+from cutility.utils import check_path_exist
 
-b = cu.check_path_exist("./data/temp.txt")
-print(b)
+exists = check_path_exist("./data/temp.txt")
+print(exists)  # Output: False
 ```
 
-Output:
-
-```markdown
-False
-```
-
-<!-- TOC --><a name="logger"></a>
-
-## logger
-
-<!-- TOC --><a name="simple-logger"></a>
-
-### simple logger
+#### Load Environment Variables
 
 ```python
-import cutility as cu
-
-# Create a simple logger instance
-log = cu.get_simple_logger()
-
-# Log an information message
-log.i("hello world of loggers")
-
-# also supports warning critical debug error messages
-# log.i, log.d, log.w, log.e, log.c
-```
-
-Output:
-
-```log
-[2023-12-17 02:21:03,847] - [INFO] : hello world of loggers
-```
-
-<!-- TOC --><a name="io"></a>
-
-## io
-
-<!-- TOC --><a name="read-write-files"></a>
-
-### read write files
-
-Read write files. Currently supports only 3 formats:
-
-- text
-- json
-- yaml
-
-```python
-
-import cutility as cu
-
-# Example 1: Reading and Writing a text file
-file_content = cu.read_text("./data/example_r.txt")
-cu.write_text(file_content, "./data/example_w.txt")
-
-# Example 2: Reading and Writing a JSON file
-json_data = cu.read_json("./data/example_r.json")
-cu.write_json(json_data, "./data/example_w.json")
-
-
-# Example 3: Reading and Writing a YAML file
-yaml_data = cu.read_yaml("./data/example_r.yaml")
-cu.write_yaml(yaml_data, "./data/example_w.yaml")
-```
-
-<!-- TOC --><a name="data"></a>
-
-## env
-
-### load_env
-
-<!-- TOC --><a name="env loader"></a>
-
-.env file format
-
-```text
-PROJECT_ROOT=/path/to/src
-DATA_ROOT=/path/to/data
-CONFIG_PATH=/path/to/config.yml
-```
-
-```python
-# load env variables
-
-import os
-from cutility import load_env
+from cutility.utils import load_env
 
 ENV = load_env("./.env")
 print(ENV)
@@ -175,30 +72,39 @@ print(os.getenv("PROJECT_ROOT"))
 print(os.getenv("CONFIG_PATH"))
 ```
 
-Output:
+### Loggers
 
+#### Simple Logger
+
+```python
+from cutility.loggers import get_simple_logger
+
+log = get_simple_logger()
+log.i("Hello world of loggers")
+# Output: [2023-12-17 02:21:03,847] - [INFO] : Hello world of loggers
 ```
-True
-/path/to/data
-/path/to/src
-/path/to/config.yml
+
+### IO
+
+#### Read and Write Files
+
+```python
+from cutility.io import readers, writers
+
+# Read and write text files
+text_content = readers.read_text("./data/example_r.txt")
+writers.write_text(text_content, "./data/example_w.txt")
+
+# Read and write JSON files
+json_data = readers.read_json("./data/example_r.json")
+writers.write_json(json_data, "./data/example_w.json")
+
+# Read and write YAML files
+yaml_data = readers.read_yaml("./data/example_r.yaml")
+writers.write_yaml(yaml_data, "./data/example_w.yaml")
 ```
 
-## data
-
-<!-- TOC --><a name="dir-handler"></a>
-
-### dir handler
-
-Method to standardize access to folders and configs
-
-What is `project_root`?
-
-- Directory that holds your src folder is your `project_root`
-
-What is `data_root`?
-
-- Directory that holds all your data folder is your `data_root`
+### Dir Handler
 
 ```python
 from cutility import get_dir_handler
@@ -206,125 +112,86 @@ from cutility import get_dir_handler
 dirh = get_dir_handler(project_root="./", data_root="./data", verbose=True)
 print(dirh.get_data_root())
 print(dirh.get_project_root())
-
 ```
 
-Output:
+### Cleaners
 
-```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Setting paths:
-Project Root: ./
-Config Path: /path/to/config
-Config Files: [list of config files]
-Data Root: ./data
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-```
-
-<!-- TOC --><a name="cleaner"></a>
-
-## Cleaner
-
-<!-- TOC --><a name="generic-cleaner"></a>
-
-### Generic cleaner
-
-Use this snippet to collectively apply multiple cleaning functions
+#### Generic Cleaner
 
 ```python
 from cutility.cleaners import GenericSimpleTextCleaner
-from typing import List, Dict, Tuple, Any, Callable
 
-# Create an instance of GenericSimpleTextCleaner
 gtc = GenericSimpleTextCleaner()
+sample_text = """Check out this link: https://example.com. 😎 #Python @user1, sample@gmail.com 123-456-7908"""
 
-# Sample text
-sample_text = """Check out this link: https://example.com. 😎 #Python @user1, sample@gmail.com 123-456-7908 #testing # python"""
-
-# List of names for name replacement
-names_list = ["John", "Doe", "Jane", "Smith"]
-
-# Define cleaning steps
-all_cleaning_steps = [
+cleaning_steps = [
     (gtc.replace_contacts, {"repl": " {{PHONE}} "}),
     (gtc.replace_emails, {"repl": " {{EMAIL}} "}),
-    (gtc.replace_names, {"names_list": names_list, "repl": " {{PERSON_NAME}} "}),
     (gtc.clean_emojis, {}),
-    (gtc.clean_extra_newlines, {}),
-    (gtc.clean_extra_spaces, {}),
     (gtc.clean_hashtags, {}),
-    (gtc.clean_profile_handle, {}),
-    (gtc.clean_punctuations_except, {"exceptions": [",", ".", "\n", "?", "}", "{"]}),
-    (gtc.clean_unicode_characters, {}),
     (gtc.clean_web_links, {}),
 ]
 
-# Apply text cleaning functions
-output = gtc.apply_text_cleaning_functions(sample_text, all_cleaning_steps)
-
-# Print the original and cleaned text
-print(sample_text)
-print()
-print(output)
+cleaned_text = gtc.apply_text_cleaning_functions(sample_text, cleaning_steps)
+print(cleaned_text)
 ```
 
-<!-- TOC --><a name="simple-text-cleaner"></a>
-
-### Simple Text cleaner
-
-Use this snippet to individually apply simple cleaning functions
+#### Simple Text Cleaner
 
 ```python
-# simpler text cleaner
-from cutility.cleaners import SimpleTextCleaner as stc
+from cutility.cleaners import SimpleTextCleaner
 
-t = stc.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
-print(t)
-
+cleaned_text = SimpleTextCleaner.clean_emojis("🌟 Sed euismod justo t semper justo. 😊")
+print(cleaned_text)
 ```
 
-<!-- TOC --><a name="pii-text-cleaner"></a>
-
-### PII Text cleaner
-
-Use this snippet to individually apply PII cleaning functions
+#### PII Text Cleaner
 
 ```python
-from cutility.cleaners import PiiTextCleaner as ptc
+from cutility.cleaners import PiiTextCleaner
 
-t = ptc.replace_emails(
-    ptc.replace_contacts(
-        "My contact number is +1(123) 456 7890 and my email is email@company.com"
-    )
-)
-print(t)
+text = "My contact number is +1(123) 456 7890 and my email is email@company.com"
+cleaned_text = PiiTextCleaner.replace_emails(PiiTextCleaner.replace_contacts(text))
+print(cleaned_text)
 ```
 
-<!-- TOC --><a name="appendix"></a>
+## Project Structure
 
-# Appendix
-
-<!-- TOC --><a name="getting-names_list"></a>
-
-## Getting names_list
-
-I have curated list of first names and last names
-
-- public github databases and compiled it here in a github gist.
-- references mentioned in the end
-
-Use this command to get names data.
-
-```bash
-wget https://gist.githubusercontent.com/sagarsrc/e6c7361f9ba6a64b2c9ac5bb10f0285a/raw/fbcca7c6821e7aff285271a6ce42361bbe95cc0c/pii_names.json
+```
+./src
+├── cutility
+│   ├── __init__.py
+│   ├── _version.py
+│   ├── cleaners
+│   │   ├── __init__.py
+│   │   ├── clean.py
+│   │   ├── pii_cleaner.py
+│   │   └── text_cleaner.py
+│   ├── dir_handler.py
+│   ├── io
+│   │   ├── __init__.py
+│   │   ├── readers
+│   │   └── writers
+│   ├── loggers
+│   │   ├── __init__.py
+│   │   └── _simple_logger.py
+│   └── utils
+│       ├── __init__.py
+│       ├── env_loader.py
+│       ├── exec_time.py
+│       └── path.py
+└── cutility.egg-info
+    ├── PKG-INFO
+    ├── SOURCES.txt
+    ├── dependency_links.txt
+    ├── requires.txt
+    └── top_level.txt
 ```
 
-<!-- TOC --><a name="references"></a>
+## Contributing
 
-# References
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-[1] PII names datasets:
+## License
 
-- [~160k first names ~100k last names](https://github.com/Debdut/names.io)
-- [Indian Names dataset](https://github.com/MASTREX/List-of-Indian-Names)
+This project is licensed under the [MIT License](LICENSE).
