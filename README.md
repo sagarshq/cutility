@@ -21,6 +21,7 @@ Common utilities for faster development
       - [Generic Cleaner](#generic-cleaner)
       - [Simple Text Cleaner](#simple-text-cleaner)
       - [PII Text Cleaner](#pii-text-cleaner)
+    - [Path Manager](#path-manager)
   - [Project Structure](#project-structure)
   - [Contributing](#contributing)
   - [License](#license)
@@ -153,6 +154,23 @@ from cutility.cleaners import PiiTextCleaner
 text = "My contact number is +1(123) 456 7890 and my email is email@company.com"
 cleaned_text = PiiTextCleaner.replace_emails(PiiTextCleaner.replace_contacts(text))
 print(cleaned_text)
+```
+
+### Path Manager
+
+```python
+from cutility import PathManager, create_path_manager
+
+pm = create_path_manager(project_root="./", data_root="./data", verbose=True)
+print(pm.data_root)
+print(pm.project_root)
+
+# Load YAML configuration
+config = pm.load_yaml_config("my_config")
+print(config)
+
+# Create directory structure
+pm.create_directory_structure("./output", ["logs", "data", "results"])
 ```
 
 ## Project Structure
