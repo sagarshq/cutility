@@ -159,33 +159,27 @@ print(cleaned_text)
 
 ```
 ./src
-├── cutility
-│   ├── __init__.py
-│   ├── _version.py
-│   ├── cleaners
-│   │   ├── __init__.py
-│   │   ├── clean.py
-│   │   ├── pii_cleaner.py
-│   │   └── text_cleaner.py
-│   ├── dir_handler.py
-│   ├── io
-│   │   ├── __init__.py
-│   │   ├── readers
-│   │   └── writers
-│   ├── loggers
-│   │   ├── __init__.py
-│   │   └── _simple_logger.py
-│   └── utils
-│       ├── __init__.py
-│       ├── env_loader.py
-│       ├── exec_time.py
-│       └── path.py
-└── cutility.egg-info
-    ├── PKG-INFO
-    ├── SOURCES.txt
-    ├── dependency_links.txt
-    ├── requires.txt
-    └── top_level.txt
+└── cutility
+    ├── __init__.py
+    ├── _version.py
+    ├── cleaners
+    │   ├── __init__.py
+    │   ├── clean.py
+    │   ├── pii_cleaner.py
+    │   └── text_cleaner.py
+    ├── dir_handler.py
+    ├── io
+    │   ├── __init__.py
+    │   ├── readers
+    │   └── writers
+    ├── loggers
+    │   ├── __init__.py
+    │   └── _simple_logger.py
+    └── utils
+        ├── __init__.py
+        ├── env_loader.py
+        ├── exec_time.py
+        └── path.py
 ```
 
 ## Contributing
